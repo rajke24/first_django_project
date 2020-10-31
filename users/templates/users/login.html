@@ -1,19 +1,31 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
+{% load socialaccount %}
 {% block content %}
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
-            <fieldset class="form-group">
+            <fieldset class="form-group mb-0">
                 <legend class="border-bottom mb-4">Log In</legend>
                 {{ form|crispy }}
             </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Login</button>
-                <small class="text-muted ml-2"><a href="{% url 'password_reset' %}">Forgot Password?</a></small>
+            <div class="text-right mb-3">
+                <small class="text-muted mr-1"><a href="{% url 'password_reset' %}">Forgot Password?</a></small>
+            </div>
+            <div class="form-group col text-center">
+                <button class="btn btn-block btn-outline-info" type="submit">Login</button>
+            </div>
+            <div class="col text-center mb-4">
+                <h6><span>or</span></h6>
+            </div>
+            <div class="col text-center">
+                <a class="btn btn-outline-dark btn-block mb-4" href="{% provider_login_url 'google' %}" role="button" >
+                    <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                    Login with Google
+                </a>
             </div>
         </form>
-        <div class="border-top pt-3">
+        <div class="border-top pt-3 text-center mb-2">
             <small class="text-muted">
                 Need an account? <a class="ml-2" href="{% url 'register' %} ">Sign Up Now</a>
             </small>
